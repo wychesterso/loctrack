@@ -7,7 +7,8 @@ RUN pip install -r requirements.txt
 
 COPY backend/ .
 
-ENV FLASK_APP=app.py
+ENV PYTHONPATH=/app
+ENV FLASK_APP=app
 ENV FLASK_RUN_PORT=5000
 ENV FLASK_RUN_HOST=0.0.0.0
 

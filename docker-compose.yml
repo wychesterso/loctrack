@@ -1,0 +1,20 @@
+services:
+    backend:
+        build: .
+        container_name: loctrack-backend
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./data:/app/data
+        environment:
+            - FLASK_APP=app
+            - FLASK_RUN_HOST=0.0.0.0
+
+    test:
+        build: .
+        command: pytest
+        volumes:
+            - ./data:/app/data
+        environment:
+            - FLASK_APP=app
+            - PYTHONPATH=/app
