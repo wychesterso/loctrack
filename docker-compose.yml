@@ -1,6 +1,7 @@
 services:
     backend:
-        build: .
+        build:
+            context: ./backend
         container_name: loctrack-backend
         ports:
             - "5000:5000"
@@ -11,10 +12,18 @@ services:
             - FLASK_RUN_HOST=0.0.0.0
 
     test:
-        build: .
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
         command: pytest
         volumes:
             - ./data:/app/data
         environment:
             - FLASK_APP=app
             - PYTHONPATH=/app
+
+    frontend:
+        build: ./frontend
+        ports:
+            - "3000:80"
+        restart: unless-stopped
